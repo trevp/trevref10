@@ -1,41 +1,115 @@
-all: d.h d2.h sqrtm1.h base.h base2.h \
-ge_add.h ge_sub.h \
-ge_madd.h ge_msub.h \
+
+
+ED25519_FILES = \
+api.h \
+base.h \
+base.py \
+base2.h \
+base2.py \
+d.h \
+d.py \
+d2.h \
+d2.py \
+fe.h \
+fe_0.c \
+fe_1.c \
+fe_add.c \
+fe_cmov.c \
+fe_copy.c \
+fe_frombytes.c \
+fe_invert.c \
+fe_isnegative.c \
+fe_isnonzero.c \
+fe_mul.c \
+fe_neg.c \
+fe_pow22523.c \
+fe_sq.c \
+fe_sq2.c \
+fe_sub.c \
+fe_tobytes.c \
+ge.h \
+ge_add.c \
+ge_add.h \
+ge_add.q \
+ge_double_scalarmult.c \
+ge_frombytes.c \
+ge_madd.c \
+ge_madd.h \
+ge_madd.q \
+ge_msub.c \
+ge_msub.h \
+ge_msub.q \
+ge_p1p1_to_p2.c \
+ge_p1p1_to_p3.c \
+ge_p2_0.c \
+ge_p2_dbl.c \
 ge_p2_dbl.h \
-pow225521.h pow22523.h
+ge_p2_dbl.q \
+ge_p3_0.c \
+ge_p3_dbl.c \
+ge_p3_to_cached.c \
+ge_p3_to_p2.c \
+ge_p3_tobytes.c \
+ge_precomp_0.c \
+ge_scalarmult_base.c \
+ge_sub.c \
+ge_sub.h \
+ge_sub.q \
+ge_tobytes.c \
+keypair.c \
+open.c \
+pow22523.h \
+pow22523.q \
+pow225521.h \
+pow225521.q \
+q2h.sh \
+sc.h \
+sc_muladd.c \
+sc_reduce.c \
+sign.c \
+sqrtm1.h \
+sqrtm1.py
 
-d.h: d.py
-	python d.py > d.h
+ED25519_C_FILES = \
+fe_0.c \
+fe_1.c \
+fe_add.c \
+fe_cmov.c \
+fe_copy.c \
+fe_frombytes.c \
+fe_invert.c \
+fe_isnegative.c \
+fe_isnonzero.c \
+fe_mul.c \
+fe_neg.c \
+fe_pow22523.c \
+fe_sq.c \
+fe_sq2.c \
+fe_sub.c \
+fe_tobytes.c \
+ge_add.c \
+ge_double_scalarmult.c \
+ge_frombytes.c \
+ge_madd.c \
+ge_msub.c \
+ge_p1p1_to_p2.c \
+ge_p1p1_to_p3.c \
+ge_p2_0.c \
+ge_p2_dbl.c \
+ge_p3_0.c \
+ge_p3_dbl.c \
+ge_p3_to_cached.c \
+ge_p3_to_p2.c \
+ge_p3_tobytes.c \
+ge_precomp_0.c \
+ge_scalarmult_base.c \
+ge_sub.c \
+ge_tobytes.c \
+keypair.c \
+open.c \
+sc_muladd.c \
+sc_reduce.c \
+sign.c
 
-d2.h: d2.py
-	python d2.py > d2.h
-
-sqrtm1.h: sqrtm1.py
-	python sqrtm1.py > sqrtm1.h
-
-base.h: base.py
-	python base.py > base.h
-
-base2.h: base2.py
-	python base2.py > base2.h
-
-ge_add.h: ge_add.q q2h.sh
-	./q2h.sh < ge_add.q > ge_add.h
-
-ge_sub.h: ge_sub.q q2h.sh
-	./q2h.sh < ge_sub.q > ge_sub.h
-
-ge_madd.h: ge_madd.q q2h.sh
-	./q2h.sh < ge_madd.q > ge_madd.h
-
-ge_msub.h: ge_msub.q q2h.sh
-	./q2h.sh < ge_msub.q > ge_msub.h
-
-ge_p2_dbl.h: ge_p2_dbl.q q2h.sh
-	./q2h.sh < ge_p2_dbl.q > ge_p2_dbl.h
-
-pow22523.h: pow22523.q q2h.sh
-	./q2h.sh < pow22523.q > pow22523.h
-
-pow225521.h: pow225521.q q2h.sh
-	./q2h.sh < pow225521.q > pow225521.h
+exe: $(ED25519_FILES)
+	cc $(ED25519_C_FILES) -Iextra_includes/
